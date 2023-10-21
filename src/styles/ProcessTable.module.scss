@@ -1,0 +1,15 @@
+.table {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  align-self: center;
+  align-items: flex-end;
+  width: 600px;
+  height: 430px;
+  background-color: white;
+  overflow-x: auto !important;
+}
+
+.process {
+  flex-grow: 1;
+}

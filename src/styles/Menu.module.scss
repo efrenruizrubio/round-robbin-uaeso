@@ -1,0 +1,17 @@
+.container {
+  width: fit-content;
+  &_button {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid black;
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+  &_options {
+    margin-left: 1rem;
+    visibility: hidden;
+    &_open {
+      visibility: visible;
+    }
+  }
+}
