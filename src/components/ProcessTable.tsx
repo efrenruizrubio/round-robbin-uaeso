@@ -1,6 +1,6 @@
 'use client'
 
-import { ProcessState } from "@/types";
+import { ProcessState, State } from "@/types";
 import { useEffect, useState } from "react";
 import { Process } from "./Process";
 import styles from '@/styles/ProcessTable.module.scss'
@@ -10,7 +10,7 @@ interface ProcessTableProps {
   maxProcesses: number;
   minProcessTime?: number;
   maxProcessTime?: number;
-  hasStarted?: boolean;
+  hasStarted: boolean;
 }
 
 export const ProcessTable = ({
@@ -24,11 +24,11 @@ export const ProcessTable = ({
     const random = Math.floor(Math.random() * (maxProcessTime - minProcessTime + 1) + minProcessTime)
     return {
       index: i,
-      arrivalTime: i,
+      arrivalTime: i * 500,
       burstTime: random,
       executionTime: 0,
-      quantum: Math.floor(Math.random() * (maxProcessTime - random) + minProcessTime),
-      state: "Bloqueado",
+      quantum: Math.floor(Math.random() * (maxProcessTime - random)),
+      state: State.IDLE,
       turnAroundTime: 0,
       waitingTime: 0
     }
@@ -40,7 +40,7 @@ export const ProcessTable = ({
     if(hasStarted) setProcesses((prev) => {
       const newProcesses = structuredClone(prev)
       newProcesses.sort((a, b) => a.arrivalTime - b.arrivalTime)
-      newProcesses[0].state = "En ejecución"
+      newProcesses[0].state = State.EXECUTING
       return newProcesses
     })
   }, [hasStarted])
@@ -53,6 +53,7 @@ export const ProcessTable = ({
             <Process
               process={process}
               setProcess={setProcesses}
+              hasStarted={hasStarted}
             />
           </div>
 

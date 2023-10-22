@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 export default function useWindowResize () {
-  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  const [windowSize, setWindowSize] = useState(window?.innerWidth)
 
   const handleWindowResize = useCallback(() => {
     setWindowSize(window.innerWidth)

@@ -18,7 +18,10 @@ export const Menu = ({startProgram}: {startProgram: () => void}) => {
       <ul className={`${styles.container_options} ${showMenu ? styles.container_options_open : ''}`}>
         <li>
           <button
-            onClick={startProgram}
+            onClick={() => {
+              setShowMenu(!showMenu)
+              startProgram()
+            }}
             className={styles.container_button}
           >
             Ejecutar

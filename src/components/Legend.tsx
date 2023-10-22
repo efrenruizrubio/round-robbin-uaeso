@@ -7,14 +7,14 @@ export const Legend = () => {
         Leyenda:
       </span>
       <ul className={styles.list}>
-        <li className={styles.list_green}>
-          <strong>Bloqueado</strong>
-        </li>
-        <li className={styles.list_blue}>
-          <strong>Finalizado</strong>
-        </li>
         <li className={styles.list_red}>
           <strong>Ejecutando</strong>
+        </li>
+        <li className={styles.list_blue}>
+          <strong>Cola lista / Terminado</strong>
+        </li>
+        <li className={styles.list_green}>
+          <strong>Bloqueado</strong>
         </li>
       </ul>
     </div>

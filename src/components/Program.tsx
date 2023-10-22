@@ -14,7 +14,7 @@ export const Program = () => {
   return (
     <section className={styles.container}>
       <Menu startProgram={() => setStart(true)}/>
-      <ProcessTable maxProcesses={MAX_PROCESSES} hasStarted={start}/>
+      <ProcessTable maxProcesses={MAX_PROCESSES} hasStarted={start} />
       <Metrics />
       <Legend />
     </section>
