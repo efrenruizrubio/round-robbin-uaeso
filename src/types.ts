@@ -15,4 +15,11 @@ export interface ProcessState {
   waitingTime: number;
   turnAroundTime: number;
   quantum: number;
+  remainingTime: number;
+  responseTime: number;
+}
+
+export interface Metric {
+  title: string;
+  values: string[]
 }

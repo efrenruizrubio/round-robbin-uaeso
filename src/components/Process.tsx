@@ -1,6 +1,6 @@
 'use client'
 
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import styles from '@/styles/Process.module.scss'
 import { ProcessState, State } from '@/types'
@@ -9,9 +9,10 @@ interface ProcessProps {
   process: ProcessState;
   setProcess: Dispatch<SetStateAction<ProcessState[]>>
   hasStarted: boolean;
+  active: number;
 } 
 
-export const Process = ({ process, setProcess, hasStarted }: ProcessProps) => {
+export const Process = ({ process, setProcess, hasStarted, active }: ProcessProps) => {
   useEffect(() => {
     if(!hasStarted || process.index === 0) return
     setTimeout(() => {
@@ -23,30 +24,6 @@ export const Process = ({ process, setProcess, hasStarted }: ProcessProps) => {
       })
     }, process.arrivalTime)
   }, [hasStarted])
-
-
-  useEffect(() => {
-    if(process.state !== State.EXECUTING) return
-    let timer = setInterval(() => {
-      setProcess(prev => {
-        const newProcesses = structuredClone(prev)
-        const p = prev[process.index];
-        const nextIndex = p.index + 1 < prev.length ? p.index + 1 : 0;
-
-        p.executionTime += 1
-        
-        if(p.executionTime === p.burstTime) {
-          p.state = State.FINISHED;
-          if(newProcesses[nextIndex].state !== State.FINISHED) newProcesses[nextIndex].state = State.EXECUTING;
-          return newProcesses
-        }
-        return newProcesses
-      });
-    }, 5);
-
-    return () => clearInterval(timer);
-  }, [process.state]);
-  
 
   return (
     <div
@@ -61,12 +38,10 @@ export const Process = ({ process, setProcess, hasStarted }: ProcessProps) => {
       <div style={{
         width: '100%',
         height: process.executionTime - 2,
-        backgroundColor: process.state === State.EXECUTING ? 
-          "#ff0000" 
-          : process.state === State.READY || process.state === State.FINISHED 
-            ? "#98f6ed" : "##8def8f"
+        backgroundColor: active === process.index ? "#ff0000" : "#98f6ed"
         }} 
       />
-    </div>
-  )
+  </div>
+)
+
 }
