@@ -15,7 +15,7 @@ export const Program = () => {
   const [metrics, setMetrics] = useState<Metric[]>([])
   return (
     <section className={styles.container}>
-      <Menu startProgram={() => setStart(true)}/>
+      <Menu startProgram={() => setStart(true)} stopProgram={() => setStart(false)}/>
       <ProcessTable maxProcesses={MAX_PROCESSES} hasStarted={start} setMetrics={setMetrics}/>
       <Metrics metrics={metrics} />
       <Legend />

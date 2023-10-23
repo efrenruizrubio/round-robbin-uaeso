@@ -3,7 +3,7 @@
 import styles from '@/styles/Menu.module.scss'
 import { useState } from 'react'
 
-export const Menu = ({startProgram}: {startProgram: () => void}) => {
+export const Menu = ({startProgram, stopProgram}: {startProgram: () => void, stopProgram: () => void}) => {
   const [showMenu, setShowMenu] = useState(false)
   
   return (
@@ -25,6 +25,17 @@ export const Menu = ({startProgram}: {startProgram: () => void}) => {
             className={styles.container_button}
           >
             Ejecutar
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => {
+              setShowMenu(!showMenu)
+              stopProgram()
+            }}
+            className={styles.container_button}
+          >
+            Terminar
           </button>
         </li>
       </ul>
